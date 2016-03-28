@@ -1,0 +1,39 @@
+[data/dataset1]
+# Add "-r" to zfs snapshot command
+# Default: False
+#task_recursive=False
+
+# Snapshot lifetime value
+# Default: 2
+#task_ret_count=2
+
+# Snapshot lifetime unit
+# Default: week
+#task_ret_unit=week
+
+# Do not snapshot before this time (hour)
+# Default: 9
+task_begin=2
+
+# Do not snapshot after this time (hour)
+# Default: 18
+task_end=2
+
+# How much time has been passed between two snapshot attempts (minutes)
+# Default: 60
+#task_interval=60
+
+# How the task is repeated
+# daily  - Everyday
+# weekly - Every selected weekday
+task_repeat_unit=weekly
+
+# Weekday
+# Default: 1,2,3,4,5
+task_byweekday=6
+
+# Enabled
+# Default: True
+task_enabled=True
+[tank/dataset2]
+# run with default settings

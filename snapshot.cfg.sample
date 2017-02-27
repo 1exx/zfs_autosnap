@@ -26,14 +26,17 @@ task_end=2
 # How the task is repeated
 # daily  - Everyday
 # weekly - Every selected weekday
+# Default: weekly
 task_repeat_unit=weekly
 
 # Weekday
 # Default: 1,2,3,4,5
+#task_byweekday=1,2,3,4,5
 task_byweekday=6
 
 # Enabled
 # Default: True
 task_enabled=True
+
 [tank/dataset2]
 # run with default settings

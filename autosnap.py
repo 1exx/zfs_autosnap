@@ -45,6 +45,10 @@ class Autosnap(object):
         self.config = []
         for section in _config.sections():
             c = {}
+            c['task_enabled'] = _config.getboolean(section, 'task_enabled')
+            if not (c['task_enabled']):
+                log.debug('Filesystem %s is disabled - skipped', section)
+                break
             c['task_filesystem'] = section
             c['task_recursive'] = _config.getboolean(section, 'task_recursive')
             c['task_ret_count'] = _config.getint(section, 'task_ret_count')
@@ -54,7 +58,6 @@ class Autosnap(object):
             c['task_interval'] = _config.getint(section, 'task_interval')
             c['task_repeat_unit'] = _config.get(section, 'task_repeat_unit')
             c['task_byweekday'] = _config.get(section, 'task_byweekday')
-            c['task_enabled'] = _config.getboolean(section, 'task_enabled')
             # c['task_bymonth'] = _config.get(section, 'task_bymonth')
             # c['task_bymonthday'] = _config.get(section, 'task_bymonthday')
             self.config.append(c)

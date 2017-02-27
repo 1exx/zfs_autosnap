@@ -12,6 +12,15 @@ from subprocess import Popen, PIPE
 
 from datetime import datetime, time, timedelta
 
+def args_parse():
+    parser = argparse.ArgumentParser(description='Tool for automation ZFS Snapshots')
+    parser.add_argument('-f', '--file', help='target file')
+    parser.add_argument('-v', '--verbose', action='store_true', dest='debug', help='increase output verbosity')
+    parse = parser.parse_args()
+    return parse
+
+run_args = args_parse()
+
 # setup ability to log to syslog
 logging.NOTICE = 60
 logging.addLevelName(logging.NOTICE, "NOTICE")
@@ -21,7 +30,7 @@ logging.basicConfig(format=u'%(asctime)s %(levelname)-8s %(message)s',
 log = logging.getLogger('autosnap')
 
 # Set to True if verbose log desired
-debug = False
+debug = run_args.debug
 
 DEFAULT_DICT = {
     "task_recursive": "False",
@@ -276,16 +285,8 @@ class Autosnap(object):
 
         os.unlink('/var/run/autosnap.pid')
 
-
-def agrp_parse():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file', help='target file')
-    parse = parser.parse_args()
-    return parse
-
 def main():
-    name_file = agrp_parse()
-    Autosnap(name_file.file).main()
+    Autosnap(run_args.file).main()
 
 if __name__ == '__main__':
     main()
